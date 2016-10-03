@@ -37,12 +37,15 @@ def long_words(words):
         >>> long_words(["all", "are", "tiny"])
         []
     """
-
+    # empty list
     longer_words = []
-
+    # looping through each word in words
     for word in words:
+        # if the length of the word is greater than four letters
         if len(word) > 4:
-            longer_words += word.str()
+            # append that word to the longer_words list
+            longer_words.append(word)
+        # otherwise, pass
         else:
             pass
     return longer_words
@@ -62,8 +65,18 @@ def n_long_words(words, n):
         >>> n_long_words(["I", "like", "apples", "bananas", "you"], 5)
         ['apples', 'bananas']
     """
-
-    return ['the wrong thing']
+    # empty list
+    longer_words = []
+    # looping through each word in words
+    for word in words:
+        # if the length of the word is longer than "n"
+        if len(word) > n:
+            # add that word to the longer_words list
+            longer_words.append(word)
+        # otherwise, skip it
+        else:
+            pass
+    return longer_words
 
 
 def smallest_int(numbers):
@@ -256,8 +269,12 @@ def join_strings(words):
         >>> join_strings([])
         ''
     """
-
-    return "Not the right thing"
+    # empty string to start with
+    joined = ''
+    # for word in words, add the word to the empty string
+    for word in words:
+        joined += word
+    return joined
 
 
 def average(numbers):
@@ -279,8 +296,14 @@ def average(numbers):
     (Think of the best way to handle an empty input list, though,
     a feel free to provide a good solution here.)
     """
-
-    return 0
+    # assuming we're dealing with humans, providing a quick error message
+    # explaining exactly what "went wrong" (the input list is empty)
+    # should help to relieve the human
+    if not numbers:
+        print "Sorry, you didn't provide any numbers to get an average."
+    # calculating the average using built in Python functions
+    average = float(sum(numbers)) / len(numbers)
+    return average
 
 
 def join_strings_with_comma(words):
@@ -299,8 +322,19 @@ def join_strings_with_comma(words):
         >>> join_strings_with_comma(["Pretzel"])
         'Pretzel'
     """
-
-    return ""
+    # starting with empty string
+    comma_string = ''
+    # looping through each word
+    for word in words:
+        # only add the word with a comma if there are multiple things in list
+        # which means it starts at index 1 in the list
+        if word in words[1:]:
+            comma_string = comma_string + ', ' + word
+        # otherwise, it's the only item in the list, so don't bother adding
+        # a comma
+        else: 
+            comma_string += word
+    return comma_string
 
 
 def reverse_list(items):
@@ -325,8 +359,13 @@ def reverse_list(items):
         >>> orig
         ['apple', 'berry', 'cherry']
     """
-
-    return []
+    # empty list
+    reversed_list = []
+    # looping through each item in items, using list slicing to go backwards
+    for item in items[::-1]:
+        # add the item in the reversed_empty list
+        reversed_list.append(item)
+    return reversed_list
 
 
 def reverse_list_in_place(items):
@@ -351,8 +390,15 @@ def reverse_list_in_place(items):
         >>> orig
         ['I', 'love', 'cookies']
     """
-
-    return []
+    # using index to reassign item placement
+    count = 0
+    # looping over each item in items, starting with the last one
+    for item in items[::-1]:
+        # used list-slice assignment to make last item first, and so on
+        items[count] = item
+        # each time we cycle through, the count goes up
+        count += 1
+    return 
 
 
 def duplicates(items):
@@ -380,8 +426,24 @@ def duplicates(items):
         >>> orig
         ['apple', 'apple', 'berry']
     """
-
-    return []
+    # starting with empty list
+    list_of_duplicates = []
+    # looping through each item
+    for item in items:
+        # determining if there are duplicates of the item in the original list
+        # with count built-in function
+        if items.count(item) > 1:
+            # there are duplicates! but is it already in our list of duplicates?
+            # if yes, skip it!
+            if item in list_of_duplicates:
+                pass
+            # if it's not already in there, then append it
+            else:
+                list_of_duplicates.append(item)
+        # if there are no duplicates, do nothing to it
+        else:
+            pass
+    return list_of_duplicates
 
 
 def find_letter_indices(words, letter):
@@ -410,8 +472,35 @@ def find_letter_indices(words, letter):
     ("o" does not appear in "jumps", so the result for that input is
     `None`.)
     """
+    # empty list of the indeces
+    list_of_indices = []
+    # a counter to keep track of the index value while looping
+    index_count = 0
+    # for each word in the list provided
+    for word in words:
+        # the word either contains the letter or it does
+        # if the letter is not in the word, just add none to the list
+        if letter not in word:
+            list_of_indices.append(None)
+        # if the word does contain the letter
+        elif letter in word:
+            # for each letter in the word
+            for each_letter in word:
+                # determine if the letter of the word, starting at index 0
+                # is the same as the letter variable provided
+                # if yes
+                if letter == word[index_count]:
+                    # add that index_count to the list of indices
+                    list_of_indices.append(index_count)
+                    # reset the counter
+                    index_count = 0
+                    # break out of the loop
+                    break
+                # otherwise, add 1 to the counter and keep going
+                else:
+                    index_count += 1
 
-    return []
+    return list_of_indices
 
 #####################################################################
 # END OF PRACTICE: You can ignore everything below.
