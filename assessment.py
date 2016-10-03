@@ -81,8 +81,20 @@ def foods_in_common(foods1, foods2):
         []
 
     """
-
-    return ['the wrong thing']
+    # turn the foods lists into sets in order to use set math
+    set_foods1 = set(foods1) 
+    set_foods2 = set(foods2)
+    # find the intersection / commonality between the two food sets
+    common_set = set_foods1 & set_foods2
+    # turn the common set into a list, and sort it
+    common_list = sorted(list(common_set))
+    # if the common_list is empty, then there was no commonality
+    # return empty list
+    if not common_list:
+        return []
+    # if there were items in common, return the sorted list
+    else: 
+        return common_list
 
 
 def every_other_item(items):
@@ -98,8 +110,14 @@ def every_other_item(items):
        ... )
        ['you', 'are', 'good', 'at', 'code']
     """
-
-    return ['the wrong thing']
+    # empty list
+    alternate = []
+    # looping through each item in items, but with a cadence of 2
+    # therefore skipping every other item
+    for item in items[::2]:
+        # add the item not skipped to the alternate list
+        alternate.append(item)
+    return alternate
 
 
 def largest_n_items(items, n):
@@ -123,8 +141,27 @@ def largest_n_items(items, n):
         >>> largest_n_items([3, 3, 3, 2, 1], 2)
         [3, 3]
     """
-
-    return []
+    # empty list
+    largest = sorted([])
+    # throwaway list that provides a sorted version of items inputted
+    sorted_and_deletable_list = sorted(items)
+    # looping through each item in items
+    for item in items:
+        # if the length of the list of stored numbers is equal to n, we have
+        # enough numbers in the list and can just return the list
+        if len(largest) == n:
+            return largest
+        # but while the length of stored numbers is still less than n....
+        elif len(largest) < n:
+            # add the last number from the sorted / throwaway list
+            # presumably the largest
+            largest.append(sorted_and_deletable_list[-1])
+            # delete the last number from the throwaway list
+            sorted_and_deletable_list.pop()
+            # sort the largest list while you're at it
+            largest.sort()
+    
+    return largest
 
 
 #####################################################################
